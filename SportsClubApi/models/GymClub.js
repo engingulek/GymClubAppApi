@@ -10,8 +10,7 @@ const GymClubSchema = new mongoose.Schema({
     startClock : {type:String,required:true},
     finishClock : {type:String,required:true},
     payPeriod : {type:Object,required:true},
-    comment : {type:Array,required:true},
-    registeredUsers : {type:Array,required:true},
+    
 })
 
 module.exports = mongoose.model("GymClub",GymClubSchema)

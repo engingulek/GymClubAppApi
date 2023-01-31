@@ -16,7 +16,30 @@ router.get("/gymClubs",(req,res)=>{
 })
 
 
+router.post("/userGymAdvert",(req,res)=>{
+    GymClub.find()
+    .then(gymClubs => {
+        var userGymClubAdvert = gymClubs.filter(g => g.createUserId == req.body.createUserId)
+        
+        if (userGymClubAdvert.length == 0 ){
+            res.json({
+                list: [],
+                success : 1
+            }) 
+        }else{
+    
+            res.json({
+                list :userGymClubAdvert,
+                success : 0
+            })      
+        }
+    })
+})
+
+
 router.post("/createGymClub",(req,res)=>{
+    console.log("create çalıştı")
+    console.log(req.body)
     const newGymClub = new GymClub ({
         createUserId : req.body.createUserId,
         imageUrl : req.body.imageUrl,
@@ -28,15 +51,19 @@ router.post("/createGymClub",(req,res)=>{
         startClock : req.body.startClock,
         finishClock : req.body. finishClock,
         payPeriod : req.body.payPeriod,
-        comment : req.body.comment,
-        registeredUsers  : req.body.registeredUsers 
+        
     })
+    console.log(newGymClub)
     newGymClub.save()
-    res.json({
-        success : 1,
+   res.json({
+        list : [newGymClub],
         message : "success"
     })
 })
+
+
+
+
 
 
 module.exports = router

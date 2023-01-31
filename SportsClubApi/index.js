@@ -3,6 +3,9 @@ const app = express()
 const mongoose = require('mongoose')
 const bodyParser  = require('body-parser')
 const gymClubRouter = require('./routers/gymClub')
+const gymClubSportInfoRouter = require('./routers/gymSportInfo')
+const coachRouter = require("./routers/coach")
+const coachCategoryRouter = require("./routers/coachCategory")
 app.use(bodyParser.json())
 
 mongoose.connect("mongodb+srv://sportsClubApp:OnngmSpMbiriSkYx@engingulek.hscve.mongodb.net/sportsClubAppDatabase?retryWrites=true&w=majority")
@@ -14,6 +17,9 @@ mongoose.connection.once("open",()=>{
 })
 
 app.use("/",gymClubRouter)
+app.use("/",gymClubSportInfoRouter)
+app.use("/",coachRouter)
+app.use("/",coachCategoryRouter)
 
 
 app.listen(3000,()=> { 
